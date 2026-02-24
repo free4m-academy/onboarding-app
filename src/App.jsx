@@ -301,8 +301,8 @@ const TextInput = styled.textarea`
   max-height: 120px;
   line-height: 1.5;
   transition: border-color 0.15s;
-  &::placeholder { color: #555; }
-  &:focus { border-color: #555; }
+  &::placeholder { color: #888; }
+  &:focus { border-color: #888; }
   &:disabled { opacity: 0.4; cursor: not-allowed; }
 `
 const SendBtn = styled.button`
@@ -319,7 +319,7 @@ const SendBtn = styled.button`
   align-self: flex-end;
   &:hover:not(:disabled) { background: #e0392d; }
   &:active:not(:disabled) { transform: scale(0.95); }
-  &:disabled { opacity: 0.3; cursor: not-allowed; }
+  &:disabled { opacity: 1; cursor: not-allowed; }
 `
 const StatusBanner = styled.div`
   margin: 0 24px 12px;
