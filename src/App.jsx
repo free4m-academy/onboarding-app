@@ -513,7 +513,7 @@ const MessageRow = styled.div`
 const BubbleWrapper = styled.div`
   max-width: 80%;
   padding: 10px 14px;
-  opacity: 0.6;
+  opacity: 0.7;
   border-radius: ${p => p.$role === 'user'
     ? '18px 18px 4px 18px'
     : '18px 18px 18px 4px'};
