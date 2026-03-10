@@ -513,11 +513,12 @@ const MessageRow = styled.div`
 const BubbleWrapper = styled.div`
   max-width: 80%;
   padding: 10px 14px;
+  opacity: 0.6;
   border-radius: ${p => p.$role === 'user'
     ? '18px 18px 4px 18px'
     : '18px 18px 18px 4px'};
-  background: ${p => p.$role === 'user' ? '#ececec' : '#2a2a2a'};
-  color: ${p => p.$role === 'user' ? '#1a1a1a' : '#ececec'};
+  background: ${p => p.$role === 'user' ? 'white' : '#050d2e'};
+  color: ${p => p.$role === 'user' ? '#050d2e' : 'white'};
   font-size: 14px;
   line-height: 1.55;
   white-space: pre-wrap;
