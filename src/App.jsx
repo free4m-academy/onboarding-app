@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect } from 'react'
 import styled, { createGlobalStyle, keyframes } from 'styled-components'
 import emailjs from '@emailjs/browser'
 
+// Cyan: #00d4ff
+// Pink/Purple: #bb33ff
+// Dark navy blue: #050d2e
+
 // ─── EMAILJS CONFIG ───────────────────────────────────────────────────────────
 const EMAILJS_SERVICE  = 'service_tebuol7';
 const EMAILJS_TEMPLATE = 'template_zul43jb';
@@ -129,224 +133,322 @@ function Background() {
       <SvgBackground>
         <svg viewBox="0 0 900 1200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            {/* Base dark navy gradient */}
-            <radialGradient id="bgBase" cx="50%" cy="60%" r="80%">
-              <stop offset="0%" stopColor="#040d2a"/>
-              <stop offset="100%" stopColor="#010510"/>
+            {/* Base */}
+            <radialGradient id="bgBase" cx="30%" cy="70%" r="90%">
+              <stop offset="0%" stopColor="#050d2e"/>
+              <stop offset="60%" stopColor="#020818"/>
+              <stop offset="100%" stopColor="#010410"/>
             </radialGradient>
 
-            {/* Cyan glow - left center */}
-            <radialGradient id="cyanGlow" cx="15%" cy="62%" r="25%">
-              <stop offset="0%" stopColor="#00cfff" stopOpacity="0.9"/>
-              <stop offset="100%" stopColor="#00cfff" stopOpacity="0"/>
+            {/* Cyan glow left-center */}
+            <radialGradient id="cyanGlow" cx="12%" cy="65%" r="30%">
+              <stop offset="0%" stopColor="#00d4ff" stopOpacity="0.7"/>
+              <stop offset="100%" stopColor="#00d4ff" stopOpacity="0"/>
             </radialGradient>
 
-            {/* Purple glow - bottom right */}
-            <radialGradient id="purpleGlow" cx="85%" cy="88%" r="22%">
-              <stop offset="0%" stopColor="#cc44ff" stopOpacity="0.85"/>
-              <stop offset="100%" stopColor="#cc44ff" stopOpacity="0"/>
+            {/* Purple glow bottom-right */}
+            <radialGradient id="purpleGlow" cx="80%" cy="92%" r="35%">
+              <stop offset="0%" stopColor="#bb33ff" stopOpacity="0.6"/>
+              <stop offset="100%" stopColor="#bb33ff" stopOpacity="0"/>
             </radialGradient>
 
-            {/* Blue ambient - bottom center */}
-            <radialGradient id="blueAmbient" cx="50%" cy="90%" r="55%">
-              <stop offset="0%" stopColor="#1a3aff" stopOpacity="0.35"/>
-              <stop offset="100%" stopColor="#1a3aff" stopOpacity="0"/>
+            {/* Blue deep ambient */}
+            <radialGradient id="blueAmbient" cx="50%" cy="80%" r="70%">
+              <stop offset="0%" stopColor="#0a1aaa" stopOpacity="0.4"/>
+              <stop offset="100%" stopColor="#0a1aaa" stopOpacity="0"/>
             </radialGradient>
 
-            {/* Wave gradient - cyan band */}
-            <linearGradient id="waveGradCyan" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#00cfff" stopOpacity="0.9"/>
-              <stop offset="40%" stopColor="#0077ff" stopOpacity="0.7"/>
-              <stop offset="100%" stopColor="#0033cc" stopOpacity="0.1"/>
+            {/* Cyan wave linear gradient - fades left bright to right dark */}
+            <linearGradient id="cyanWaveFill" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stopColor="#00d4ff" stopOpacity="0.0"/>
+              <stop offset="15%"  stopColor="#00aaff" stopOpacity="0.5"/>
+              <stop offset="40%"  stopColor="#0066ff" stopOpacity="0.4"/>
+              <stop offset="70%"  stopColor="#0033aa" stopOpacity="0.15"/>
+              <stop offset="100%" stopColor="#001166" stopOpacity="0.0"/>
             </linearGradient>
 
-            {/* Wave gradient - purple band */}
-            <linearGradient id="waveGradPurple" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#3311aa" stopOpacity="0.2"/>
-              <stop offset="50%" stopColor="#7722ff" stopOpacity="0.8"/>
-              <stop offset="80%" stopColor="#cc44ff" stopOpacity="0.9"/>
-              <stop offset="100%" stopColor="#cc44ff" stopOpacity="0.3"/>
+            {/* Cyan edge glow */}
+            <linearGradient id="cyanEdge" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stopColor="#00eeff" stopOpacity="0.0"/>
+              <stop offset="10%"  stopColor="#00eeff" stopOpacity="1.0"/>
+              <stop offset="45%"  stopColor="#4499ff" stopOpacity="0.7"/>
+              <stop offset="75%"  stopColor="#2255cc" stopOpacity="0.2"/>
+              <stop offset="100%" stopColor="#0022aa" stopOpacity="0.0"/>
             </linearGradient>
 
-            {/* Clip path for waves */}
-            <clipPath id="bottomHalf">
-              <rect x="0" y="500" width="900" height="700"/>
-            </clipPath>
+            {/* Purple wave gradient - fades from left dark to right bright then dark */}
+            <linearGradient id="purpleWaveFill" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stopColor="#220066" stopOpacity="0.0"/>
+              <stop offset="25%"  stopColor="#4411aa" stopOpacity="0.3"/>
+              <stop offset="55%"  stopColor="#7722ff" stopOpacity="0.55"/>
+              <stop offset="75%"  stopColor="#aa33ff" stopOpacity="0.6"/>
+              <stop offset="90%"  stopColor="#cc44ff" stopOpacity="0.3"/>
+              <stop offset="100%" stopColor="#cc44ff" stopOpacity="0.0"/>
+            </linearGradient>
+
+            {/* Purple edge */}
+            <linearGradient id="purpleEdge" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stopColor="#6600ff" stopOpacity="0.0"/>
+              <stop offset="30%"  stopColor="#8833ff" stopOpacity="0.6"/>
+              <stop offset="65%"  stopColor="#cc44ff" stopOpacity="1.0"/>
+              <stop offset="85%"  stopColor="#dd66ff" stopOpacity="0.5"/>
+              <stop offset="100%" stopColor="#cc44ff" stopOpacity="0.0"/>
+            </linearGradient>
 
             {/* Glow filter */}
-            <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="6" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
+            <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
 
-            {/* Soft blur filter for wave bodies */}
+            {/* Strong glow for bright edges */}
+            <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="10" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+
+            {/* Soft blur for wave bodies */}
+            <filter id="waveBlur">
+              <feGaussianBlur stdDeviation="8"/>
+            </filter>
+
+            {/* Very soft blur */}
             <filter id="softBlur">
               <feGaussianBlur stdDeviation="3"/>
             </filter>
           </defs>
 
-          {/* Base */}
+          {/* ── BASE LAYERS ── */}
           <rect width="900" height="1200" fill="url(#bgBase)"/>
           <rect width="900" height="1200" fill="url(#blueAmbient)"/>
           <rect width="900" height="1200" fill="url(#cyanGlow)"/>
           <rect width="900" height="1200" fill="url(#purpleGlow)"/>
 
-          {/* ── CIRCUIT LINES top-left area ── */}
-          <g stroke="#00aaff" strokeOpacity="0.35" strokeWidth="0.8" fill="none">
-            <polyline points="30,580 30,620 80,620 80,650 160,650"/>
-            <polyline points="30,600 60,600 60,640 140,640 140,670 220,670"/>
-            <polyline points="50,610 50,660 180,660 180,680"/>
-            <circle cx="80"  cy="620" r="2.5" fill="#00ccff" fillOpacity="0.7" stroke="none"/>
-            <circle cx="140" cy="640" r="2.5" fill="#00ccff" fillOpacity="0.7" stroke="none"/>
-            <circle cx="180" cy="660" r="2.5" fill="#cc44ff" fillOpacity="0.7" stroke="none"/>
-            <circle cx="60"  cy="600" r="2"   fill="#00ccff" fillOpacity="0.5" stroke="none"/>
-          </g>
+          {/* ══════════════════════════════════════════
+            CYAN WAVE — diagonal top-left to mid-right
+            fades into dark naturally on both ends
+        ══════════════════════════════════════════ */}
 
-          {/* ── CIRCUIT LINES bottom-left ── */}
-          <g stroke="#00aaff" strokeOpacity="0.3" strokeWidth="0.8" fill="none">
-            <polyline points="20,980 20,1010 70,1010 70,1040 150,1040"/>
-            <polyline points="40,1000 40,1030 120,1030 120,1060 200,1060"/>
-            <polyline points="20,1020 90,1020 90,1050 170,1050 170,1080 250,1080"/>
-            <circle cx="70"  cy="1010" r="2.5" fill="#00ccff" fillOpacity="0.7" stroke="none"/>
-            <circle cx="120" cy="1030" r="2.5" fill="#00ccff" fillOpacity="0.7" stroke="none"/>
-            <circle cx="170" cy="1050" r="2.5" fill="#cc44ff" fillOpacity="0.8" stroke="none"/>
-            <circle cx="90"  cy="1020" r="2"   fill="#00ccff" fillOpacity="0.5" stroke="none"/>
-          </g>
-
-          {/* ── CIRCUIT LINES bottom-right ── */}
-          <g stroke="#6633ff" strokeOpacity="0.3" strokeWidth="0.8" fill="none">
-            <polyline points="880,960 880,990 820,990 820,1020 740,1020"/>
-            <polyline points="880,980 850,980 850,1010 770,1010 770,1040 690,1040"/>
-            <circle cx="820" cy="990"  r="2.5" fill="#cc44ff" fillOpacity="0.7" stroke="none"/>
-            <circle cx="770" cy="1010" r="2.5" fill="#cc44ff" fillOpacity="0.7" stroke="none"/>
-          </g>
-
-          {/* ── CYAN WAVE BODY (upper wave) ── */}
+          {/* Cyan wave soft body glow */}
           <path
-              d="M -50,720 C 100,640 200,800 350,720 C 450,660 500,740 650,700 C 750,670 830,710 950,680 L 950,780 C 830,810 750,770 650,800 C 500,840 450,760 350,820 C 200,900 100,740 -50,820 Z"
-              fill="url(#waveGradCyan)"
-              opacity="0.55"
-              filter="url(#softBlur)"
-          />
-          {/* Cyan wave bright edge */}
-          <path
-              d="M -50,720 C 100,640 200,800 350,720 C 450,660 500,740 650,700 C 750,670 830,710 950,680"
-              fill="none"
-              stroke="url(#waveGradCyan)"
-              strokeWidth="2.5"
-              filter="url(#glow)"
-              opacity="0.9"
+              d="M -100,580 C 50,520 150,600 280,550 C 380,510 440,570 560,530 C 660,495 760,520 1000,490 L 1000,680 C 760,710 660,685 560,720 C 440,760 380,700 280,740 C 150,790 50,710 -100,770 Z"
+              fill="url(#cyanWaveFill)"
+              filter="url(#waveBlur)"
+              opacity="0.7"
           />
 
-          {/* Cyan wave fine lines (stacked) */}
-          {[0,8,16,24,32,40,48,56,64,72,80,88,96,104,112].map((offset, i) => (
-              <path
-                  key={i}
-                  d={`M -50,${730+offset} C 100,${650+offset} 200,${810+offset} 350,${730+offset} C 450,${670+offset} 500,${750+offset} 650,${710+offset} C 750,${680+offset} 830,${720+offset} 950,${690+offset}`}
-                  fill="none"
-                  stroke="#00aaff"
-                  strokeWidth="0.4"
-                  strokeOpacity={0.18 - i * 0.01}
-              />
-          ))}
+          {/* Cyan wave fine lines — 22 lines stacked */}
+          {Array.from({length: 22}).map((_, i) => {
+            const o = i * 7
+            const op = Math.max(0, 0.22 - i * 0.009)
+            return (
+                <path key={`cl${i}`}
+                      d={`M -100,${592+o} C 50,${532+o} 150,${612+o} 280,${562+o} C 380,${522+o} 440,${582+o} 560,${542+o} C 660,${507+o} 760,${532+o} 1000,${502+o}`}
+                      fill="none" stroke="#00bbff" strokeWidth="0.5" strokeOpacity={op}
+                />
+            )
+          })}
 
-          {/* ── PURPLE WAVE BODY (lower wave) ── */}
+          {/* Cyan wave bright top edge */}
           <path
-              d="M -50,900 C 150,840 250,960 420,900 C 550,850 620,920 750,880 C 820,855 880,890 950,870 L 950,980 C 880,1000 820,965 750,990 C 620,1030 550,960 420,1010 C 250,1070 150,950 -50,1010 Z"
-              fill="url(#waveGradPurple)"
-              opacity="0.6"
-              filter="url(#softBlur)"
+              d="M -100,588 C 50,528 150,608 280,558 C 380,518 440,578 560,538 C 660,503 760,528 1000,498"
+              fill="none" stroke="url(#cyanEdge)" strokeWidth="2.5"
+              filter="url(#glow)" opacity="1"
           />
+
+          {/* Extra bright hotspot on left where cyan bursts */}
+          <path
+              d="M -100,600 C 20,545 100,610 200,575"
+              fill="none" stroke="#00ffff" strokeWidth="3.5"
+              filter="url(#strongGlow)" opacity="0.85"
+          />
+
+          {/* Secondary thinner cyan wave above */}
+          {Array.from({length: 10}).map((_, i) => {
+            const o = i * 6
+            const op = Math.max(0, 0.13 - i * 0.01)
+            return (
+                <path key={`cl2${i}`}
+                      d={`M -100,${510+o} C 80,${460+o} 180,${520+o} 310,${478+o} C 420,${445+o} 500,${495+o} 640,${462+o} C 760,${434+o} 860,${455+o} 1000,${435+o}`}
+                      fill="none" stroke="#0099ee" strokeWidth="0.4" strokeOpacity={op}
+                />
+            )
+          })}
+
+          {/* ══════════════════════════════════════════
+            PURPLE/PINK WAVE — diagonal, below cyan
+            strong on bottom-right, fades left & top
+        ══════════════════════════════════════════ */}
+
+          {/* Purple wave soft body */}
+          <path
+              d="M -100,820 C 100,760 220,840 380,790 C 500,750 590,810 700,770 C 790,738 860,762 1000,740 L 1000,950 C 860,972 790,948 700,980 C 590,1018 500,958 380,998 C 220,1048 100,968 -100,1028 Z"
+              fill="url(#purpleWaveFill)"
+              filter="url(#waveBlur)"
+              opacity="0.65"
+          />
+
+          {/* Purple wave fine lines — 22 stacked */}
+          {Array.from({length: 22}).map((_, i) => {
+            const o = i * 7
+            const op = Math.max(0, 0.20 - i * 0.008)
+            return (
+                <path key={`pl${i}`}
+                      d={`M -100,${832+o} C 100,${772+o} 220,${852+o} 380,${802+o} C 500,${762+o} 590,${822+o} 700,${782+o} C 790,${750+o} 860,${774+o} 1000,${752+o}`}
+                      fill="none" stroke="#8833ff" strokeWidth="0.5" strokeOpacity={op}
+                />
+            )
+          })}
+
           {/* Purple wave bright edge */}
           <path
-              d="M -50,900 C 150,840 250,960 420,900 C 550,850 620,920 750,880 C 820,855 880,890 950,870"
-              fill="none"
-              stroke="url(#waveGradPurple)"
-              strokeWidth="2.5"
-              filter="url(#glow)"
-              opacity="0.9"
+              d="M -100,828 C 100,768 220,848 380,798 C 500,758 590,818 700,778 C 790,746 860,770 1000,748"
+              fill="none" stroke="url(#purpleEdge)" strokeWidth="2.5"
+              filter="url(#glow)" opacity="1"
           />
 
-          {/* Purple wave fine lines */}
-          {[0,8,16,24,32,40,48,56,64,72,80,88,96].map((offset, i) => (
-              <path
-                  key={i}
-                  d={`M -50,${910+offset} C 150,${850+offset} 250,${970+offset} 420,${910+offset} C 550,${860+offset} 620,${930+offset} 750,${890+offset} C 820,${865+offset} 880,${900+offset} 950,${880+offset}`}
-                  fill="none"
-                  stroke="#7733ff"
-                  strokeWidth="0.4"
-                  strokeOpacity={0.18 - i * 0.01}
-              />
-          ))}
+          {/* Purple bright hotspot bottom-right */}
+          <path
+              d="M 650,800 C 750,768 840,785 1000,762"
+              fill="none" stroke="#dd55ff" strokeWidth="3.5"
+              filter="url(#strongGlow)" opacity="0.9"
+          />
 
-          {/* ── MESH GRID on lower purple wave ── */}
-          <g clipPath="url(#bottomHalf)" opacity="0.12">
-            <pattern id="mesh" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(-20 450 900)">
-              <path d="M 18 0 L 0 0 0 18" fill="none" stroke="#6644ff" strokeWidth="0.5"/>
-            </pattern>
-            <ellipse cx="680" cy="960" rx="280" ry="100" fill="url(#mesh)" transform="rotate(-15 680 960)"/>
+          {/* Extra thin secondary purple lines above main wave */}
+          {Array.from({length: 8}).map((_, i) => {
+            const o = i * 6
+            const op = Math.max(0, 0.10 - i * 0.01)
+            return (
+                <path key={`pl2${i}`}
+                      d={`M -100,${750+o} C 120,${700+o} 240,${765+o} 400,${722+o} C 520,${688+o} 610,${740+o} 720,${705+o} C 810,${677+o} 880,${698+o} 1000,${678+o}`}
+                      fill="none" stroke="#6622cc" strokeWidth="0.4" strokeOpacity={op}
+                />
+            )
+          })}
+
+          {/* ── MESH GRID overlay on purple wave lower-right ── */}
+          <g opacity="0.15">
+            {Array.from({length: 18}).map((_, i) => (
+                <line key={`mh${i}`}
+                      x1="480" y1={790 + i*14} x2="1000" y2={760 + i*14}
+                      stroke="#7733ff" strokeWidth="0.4" strokeOpacity="0.5"
+                />
+            ))}
+            {Array.from({length: 20}).map((_, i) => (
+                <line key={`mv${i}`}
+                      x1={490 + i*27} y1="775" x2={470 + i*27} y2="1010"
+                      stroke="#7733ff" strokeWidth="0.4" strokeOpacity="0.4"
+                />
+            ))}
+          </g>
+
+          {/* ══════════════════════════════════════════
+            CIRCUIT LINES
+        ══════════════════════════════════════════ */}
+
+          {/* Circuit cluster — left mid (near cyan burst) */}
+          <g stroke="#00aaff" strokeOpacity="0.4" strokeWidth="0.8" fill="none">
+            <polyline points="15,640 15,670 55,670 55,695 120,695"/>
+            <polyline points="15,655 40,655 40,680 100,680 100,710 180,710"/>
+            <polyline points="25,665 25,700 85,700 85,725 165,725 165,748"/>
+            <polyline points="55,650 55,685 135,685 135,715 210,715"/>
+            <polyline points="75,660 75,692 155,692 155,720 230,720 230,740"/>
+            <circle cx="55"  cy="670" r="2.5" fill="#00ddff" fillOpacity="0.8" stroke="none"/>
+            <circle cx="100" cy="680" r="2.5" fill="#00ddff" fillOpacity="0.7" stroke="none"/>
+            <circle cx="85"  cy="700" r="2"   fill="#00bbff" fillOpacity="0.6" stroke="none"/>
+            <circle cx="135" cy="685" r="2"   fill="#00bbff" fillOpacity="0.6" stroke="none"/>
+            <circle cx="165" cy="725" r="2.5" fill="#aa44ff" fillOpacity="0.7" stroke="none"/>
+            <circle cx="155" cy="720" r="2"   fill="#aa44ff" fillOpacity="0.5" stroke="none"/>
+          </g>
+
+          {/* Circuit cluster — bottom-left */}
+          <g stroke="#0099dd" strokeOpacity="0.35" strokeWidth="0.8" fill="none">
+            <polyline points="15,990 15,1015 50,1015 50,1040 120,1040"/>
+            <polyline points="15,1005 35,1005 35,1032 95,1032 95,1058 175,1058"/>
+            <polyline points="25,1020 25,1048 85,1048 85,1072 160,1072 160,1095"/>
+            <polyline points="50,1025 50,1055 130,1055 130,1082 205,1082"/>
+            <circle cx="50"  cy="1015" r="2.5" fill="#00ccff" fillOpacity="0.7" stroke="none"/>
+            <circle cx="95"  cy="1032" r="2.5" fill="#00ccff" fillOpacity="0.7" stroke="none"/>
+            <circle cx="85"  cy="1048" r="2"   fill="#00aaff" fillOpacity="0.5" stroke="none"/>
+            <circle cx="160" cy="1072" r="2.5" fill="#bb44ff" fillOpacity="0.8" stroke="none"/>
+            <circle cx="130" cy="1055" r="2"   fill="#aa33ff" fillOpacity="0.5" stroke="none"/>
+          </g>
+
+          {/* Circuit cluster — bottom-right */}
+          <g stroke="#6633cc" strokeOpacity="0.35" strokeWidth="0.8" fill="none">
+            <polyline points="885,940 885,970 840,970 840,1000 770,1000"/>
+            <polyline points="885,958 862,958 862,988 810,988 810,1015 740,1015"/>
+            <polyline points="875,972 875,1002 828,1002 828,1028 758,1028 758,1052"/>
+            <polyline points="850,980 850,1008 795,1008 795,1035 725,1035"/>
+            <circle cx="840" cy="970"  r="2.5" fill="#cc44ff" fillOpacity="0.7" stroke="none"/>
+            <circle cx="810" cy="988"  r="2.5" fill="#cc44ff" fillOpacity="0.7" stroke="none"/>
+            <circle cx="828" cy="1002" r="2"   fill="#aa33ff" fillOpacity="0.5" stroke="none"/>
+            <circle cx="758" cy="1028" r="2.5" fill="#dd55ff" fillOpacity="0.8" stroke="none"/>
+            <circle cx="795" cy="1008" r="2"   fill="#bb44ff" fillOpacity="0.5" stroke="none"/>
           </g>
 
           {/* ── SCATTERED DOTS ── */}
-          <g fill="#00ccff" fillOpacity="0.5">
-            <circle cx="200" cy="700" r="1.5"/>
-            <circle cx="240" cy="720" r="1"/>
-            <circle cx="260" cy="695" r="1.5"/>
-            <circle cx="220" cy="740" r="1"/>
-            <circle cx="180" cy="730" r="1"/>
+          <g fill="#00ccff">
+            <circle cx="195" cy="660" r="1.5" fillOpacity="0.5"/>
+            <circle cx="218" cy="675" r="1"   fillOpacity="0.4"/>
+            <circle cx="240" cy="655" r="1.5" fillOpacity="0.4"/>
+            <circle cx="260" cy="670" r="1"   fillOpacity="0.3"/>
+            <circle cx="205" cy="690" r="1"   fillOpacity="0.3"/>
           </g>
-          <g fill="#cc44ff" fillOpacity="0.6">
-            <circle cx="600" cy="1050" r="3" filter="url(#glow)"/>
-            <circle cx="720" cy="1020" r="1.5"/>
-            <circle cx="580" cy="1080" r="1"/>
-            <circle cx="640" cy="1040" r="1"/>
-          </g>
-          <g fill="#00aaff" fillOpacity="0.35">
-            <rect x="30"  cy="1000" width="3" height="3"/>
-            <rect x="38"  cy="1008" width="3" height="3"/>
-            <rect x="30"  cy="1016" width="3" height="3"/>
-            <rect x="38"  cy="1024" width="3" height="3"/>
-            <rect x="200" cy="1060" width="3" height="3"/>
-            <rect x="208" cy="1068" width="3" height="3"/>
+          <g fill="#bb44ff">
+            <circle cx="590" cy="1055" r="3"   fillOpacity="0.7" filter="url(#glow)"/>
+            <circle cx="710" cy="1025" r="1.5" fillOpacity="0.5"/>
+            <circle cx="570" cy="1078" r="1"   fillOpacity="0.4"/>
+            <circle cx="635" cy="1042" r="1"   fillOpacity="0.4"/>
+            <circle cx="660" cy="1065" r="1.5" fillOpacity="0.5"/>
           </g>
 
-          {/* ── HUD CORNER BRACKETS ── */}
-          <g stroke="#00ccff" strokeOpacity="0.4" strokeWidth="1" fill="none">
-            {/* top-left */}
-            <polyline points="15,555 15,540 30,540"/>
-            {/* top-right */}
-            <polyline points="870,555 870,540 855,540"/>
-            {/* bottom-left */}
-            <polyline points="15,1170 15,1185 30,1185"/>
-            {/* bottom-right */}
-            <polyline points="870,1170 870,1185 855,1185"/>
+          {/* Dot grid patterns */}
+          <g fill="#0099cc" fillOpacity="0.3">
+            {[0,6,12,18].map(dy => [0,6,12,18].map(dx => (
+                <circle key={`d${dx}${dy}`} cx={32+dx} cy={992+dy} r="0.8"/>
+            )))}
+          </g>
+          <g fill="#6622cc" fillOpacity="0.3">
+            {[0,6,12,18].map(dy => [0,6,12].map(dx => (
+                <circle key={`e${dx}${dy}`} cx={192+dx} cy={1062+dy} r="0.8"/>
+            )))}
           </g>
 
-          {/* Tick marks top */}
-          <g stroke="#ffffff" strokeOpacity="0.3" strokeWidth="0.8">
-            <line x1="200" y1="538" x2="200" y2="548"/>
-            <line x1="240" y1="538" x2="240" y2="548"/>
-            <line x1="280" y1="538" x2="280" y2="548"/>
-            <line x1="320" y1="538" x2="320" y2="548"/>
+          {/* ── HUD BRACKETS ── */}
+          <g stroke="#00ccff" strokeOpacity="0.45" strokeWidth="1" fill="none">
+            <polyline points="14,542 14,528 28,528"/>
+            <polyline points="886,542 886,528 872,528"/>
+            <polyline points="14,1172 14,1186 28,1186"/>
+            <polyline points="886,1172 886,1186 872,1186"/>
           </g>
-          {/* Tick marks bottom */}
+
+          {/* Top tick marks */}
+          <g stroke="#ffffff" strokeOpacity="0.25" strokeWidth="0.8">
+            {[180,210,240,270,300].map(x => (
+                <line key={x} x1={x} y1="526" x2={x} y2="536"/>
+            ))}
+          </g>
+
+          {/* Bottom tick marks */}
           <g stroke="#00ccff" strokeOpacity="0.3" strokeWidth="0.8">
-            <line x1="200" y1="1178" x2="200" y2="1188"/>
-            <line x1="240" y1="1178" x2="240" y2="1188"/>
-            <line x1="280" y1="1178" x2="280" y2="1188"/>
-            <line x1="690" y1="1178" x2="690" y2="1188"/>
-            <line x1="730" y1="1178" x2="730" y2="1188"/>
+            {[180,210,240,270,620,650,680,710].map(x => (
+                <line key={x} x1={x} y1="1178" x2={x} y2="1188"/>
+            ))}
           </g>
-          {/* Side tick marks right */}
-          <g stroke="#00ccff" strokeOpacity="0.25" strokeWidth="0.8">
-            <line x1="882" y1="800"  x2="892" y2="800"/>
-            <line x1="882" y1="860"  x2="892" y2="860"/>
-            <line x1="882" y1="980"  x2="892" y2="980"/>
-            <line x1="882" y1="1040" x2="892" y2="1040"/>
-            <line x1="882" y1="1100" x2="892" y2="1100"/>
+
+          {/* Right side ticks */}
+          <g stroke="#aa44ff" strokeOpacity="0.3" strokeWidth="0.8">
+            {[820,880,940,1000,1060,1100].map(y => (
+                <line key={y} x1="880" y1={y} x2="890" y2={y}/>
+            ))}
+          </g>
+
+          {/* Left side ticks */}
+          <g stroke="#00aaff" strokeOpacity="0.2" strokeWidth="0.8">
+            {[560,610,660,710,760].map(y => (
+                <line key={y} x1="10" y1={y} x2="20" y2={y}/>
+            ))}
           </g>
         </svg>
       </SvgBackground>
@@ -375,7 +477,7 @@ const Header = styled.header`
   backdrop-filter: blur(8px);
 `
 const LogoImg = styled.img`
-  height: 36px;
+  height: 44px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -387,7 +489,7 @@ const HeaderTitle = styled.span`
 `
 const HeaderSub = styled.span`
   font-size: 13px;
-  color: #666;
+  color: #aaa;
   margin-left: auto;
 `
 const MessagesArea = styled.main`
@@ -454,31 +556,26 @@ const TypingIndicator = styled(BubbleWrapper)`
   padding: 12px 16px;
 `
 const InputArea = styled.form`
-  padding: 16px 24px 20px;
-  border-top: 1px solid #2a2a2a;
   display: flex;
   gap: 10px;
   flex-shrink: 0;
-  background: rgba(10,10,10,0.6);
-  backdrop-filter: blur(8px);
+  padding: 24px;
 `
-const TextInput = styled.textarea`
+const TextInput = styled.input`
   flex: 1;
-  background: #2a2a2a;
+  background: #050d2e;
+  opacity: 0.8;
   border: 1px solid #333;
   border-radius: 12px;
   color: #ececec;
   font-size: 14px;
   font-family: inherit;
   padding: 10px 14px;
-  resize: none;
   outline: none;
-  min-height: 44px;
-  max-height: 120px;
-  line-height: 1.5;
+  height: 44px;
   transition: border-color 0.15s;
   &::placeholder { color: #888; }
-  &:focus { border-color: #888; }
+  &:focus { border-color: #555; }
   &:disabled { opacity: 0.4; cursor: not-allowed; }
 `
 const SendBtn = styled.button`
@@ -498,7 +595,7 @@ const SendBtn = styled.button`
   &:disabled { opacity: 1; cursor: not-allowed; }
 `
 const StatusBanner = styled.div`
-  margin: 0 24px 12px;
+  margin: 0 24px;
   padding: 10px 14px;
   border-radius: 10px;
   background: ${p => p.$ok ? '#1a3a1a' : '#3a1a1a'};
@@ -670,7 +767,6 @@ export default function App() {
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={handleKey}
                 disabled={loading || done}
-                rows={1}
             />
             <SendBtn type="submit" disabled={!input.trim() || loading || done} aria-label="Send">
               →
