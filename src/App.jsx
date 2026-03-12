@@ -3,7 +3,7 @@ import styled, { createGlobalStyle, keyframes } from "styled-components";
 import emailjs from "@emailjs/browser";
 import {
   EMAILJS_PUBLIC,
-  EMAILJS_SERVICE,
+  EMAILJS_SERVICE, EMAILJS_STUDENT,
   EMAILJS_TEMPLATE,
   RECIPIENT_EMAIL,
 } from "./constants/emailJs";
@@ -247,6 +247,7 @@ async function callClaude(messages) {
 }
 
 async function sendEmail(data) {
+  // Email to admin
   await emailjs.send(
     EMAILJS_SERVICE,
     EMAILJS_TEMPLATE,
@@ -277,6 +278,17 @@ async function sendEmail(data) {
       student_assessment: data.studentAssessment,
     },
     EMAILJS_PUBLIC
+  );
+
+  // Confirmation email to student
+  await emailjs.send(
+      EMAILJS_SERVICE,
+      EMAILJS_STUDENT,
+      {
+        to_email: data.email,
+        student_name: data.name,
+      },
+      EMAILJS_PUBLIC
   );
 }
 
